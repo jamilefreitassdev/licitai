@@ -43,10 +43,11 @@ python_version = "3.12"
 strict = true
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = ["licitai.adapters.pdf_parser", "tests.unit.test_pdf_parser"]
+disable_error_code = ["no-untyped-call"]
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 testpaths = ["tests"]
-[[tool.mypy.overrides]]
-module = ["pymupdf", "pymupdf.*", "fitz", "fitz.*"]
-disallow_untyped_calls = false

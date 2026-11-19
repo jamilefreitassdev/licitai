@@ -48,12 +48,12 @@ def get_audit_service(request: Request) -> EditalAuditService:
 @router.get("/editais/pncp", response_model=list[EditalMetadata], tags=["PNCP"])
 async def listar_editais_pncp(
     pncp_client: Annotated[PncpHttpClient, Depends(get_pncp_client)],
-    data_inicial: date = Query(..., description="Data inicial de publicação (YYYY-MM-DD)"),
-    data_final: date = Query(..., description="Data final de publicação (YYYY-MM-DD)"),
-    uf: str = Query(default="PE", min_length=2, max_length=2),
-    codigo_modalidade: int = Query(default=6, description="6 = Pregão Eletrônico"),
-    pagina: int = Query(default=1, ge=1),
-    tamanho_pagina: int = Query(default=20, ge=1, le=100),
+    data_inicial: Annotated[date, Query(description="Data inicial de publicação (YYYY-MM-DD)")],
+    data_final: Annotated[date, Query(description="Data final de publicação (YYYY-MM-DD)")],
+    uf: Annotated[str, Query(min_length=2, max_length=2)] = "PE",
+    codigo_modalidade: Annotated[int, Query(description="6 = Pregão Eletrônico")] = 6,
+    pagina: Annotated[int, Query(ge=1)] = 1,
+    tamanho_pagina: Annotated[int, Query(ge=1, le=100)] = 20,
 ) -> list[EditalMetadata]:
     try:
         return await pncp_client.buscar_contratacoes_por_data(

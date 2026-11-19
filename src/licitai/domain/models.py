@@ -43,3 +43,23 @@ class ResultadoBuscaHibrida(BaseModel):
     score_rrf: float
     rank_vetorial: int | None = None
     rank_lexical: int | None = None
+
+
+class CitacaoDocumental(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    numero_controle_pncp: str
+    arquivo_nome: str
+    numero_pagina: int
+    trecho_original: str
+    score_rrf: float
+
+
+class ParecerAuditoria(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    pergunta: str
+    resposta_fundamentada: str
+    citacoes: list[CitacaoDocumental]
+    indice_fidelidade: float = Field(..., ge=0.0, le=1.0)
+    evidencia_suficiente: bool

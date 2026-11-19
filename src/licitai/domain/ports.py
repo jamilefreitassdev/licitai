@@ -66,3 +66,13 @@ class EditalRepository(Protocol):
     ) -> list[ResultadoBuscaHibrida]:
         """Executa busca híbrida (pgvector + tsvector) ranqueada por RRF."""
         ...
+
+
+class LlmGenerator(Protocol):
+    async def gerar_parecer(
+        self,
+        pergunta: str,
+        evidencias: list[ResultadoBuscaHibrida],
+    ) -> str:
+        """Sintetiza uma resposta estritamente fundamentada nas evidências fornecidas."""
+        ...

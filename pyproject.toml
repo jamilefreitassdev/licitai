@@ -44,7 +44,7 @@ strict = true
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
-module = ["licitai.adapters.pdf_parser", "tests.unit.test_pdf_parser"]
+module = ["licitai.adapters.pdf_parser", "tests.unit.test_pdf_parser", "tests.unit.test_ingestion_service"]
 disable_error_code = ["no-untyped-call"]
 
 [tool.pytest.ini_options]

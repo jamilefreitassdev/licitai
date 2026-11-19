@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     log_level: str = Field(default="INFO", pattern="^(DEBUG|INFO|WARNING|ERROR|CRITICAL)$")
 
     database_url: PostgresDsn = Field(
-        default="postgresql+asyncpg://licitai:licitai_secret@localhost:5432/licitai_db"  # type: ignore[assignment]
+        default="postgresql+asyncpg://licitai:licitai_secret@127.0.0.1:5433/licitai_db"  # type: ignore[assignment]
     )
 
     pncp_base_url: str = "https://pncp.gov.br/api/consulta/v1"

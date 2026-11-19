@@ -30,3 +30,16 @@ class DocumentoChunk(BaseModel):
     indice_chunk: int = Field(..., ge=0)
     conteudo: str = Field(..., min_length=10)
     hash_conteudo: str = Field(..., min_length=64, max_length=64)
+
+
+class ResultadoBuscaHibrida(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    numero_controle_pncp: str
+    arquivo_nome: str
+    numero_pagina: int
+    indice_chunk: int
+    conteudo: str
+    score_rrf: float
+    rank_vetorial: int | None = None
+    rank_lexical: int | None = None

@@ -1,22 +1,21 @@
-﻿services:
+services:
   db:
     image: pgvector/pgvector:pg16
     container_name: licitai_postgres
-    restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-licitai}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-licitai_secret}
-      POSTGRES_DB: ${POSTGRES_DB:-licitai_db}
+      POSTGRES_USER: licitai
+      POSTGRES_PASSWORD: licitai_secret
+      POSTGRES_DB: licitai_db
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5433:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - licitai_pgdata:/var/lib/postgresql/data
+      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-licitai} -d ${POSTGRES_DB:-licitai_db}"]
+      test: ["CMD-SHELL", "pg_isready -U licitai -d licitai_db"]
       interval: 5s
       timeout: 5s
       retries: 5
 
 volumes:
-  pgdata:
+  licitai_pgdata:

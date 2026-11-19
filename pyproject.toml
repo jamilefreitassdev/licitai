@@ -48,5 +48,5 @@ asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 testpaths = ["tests"]
 [[tool.mypy.overrides]]
-module = ["pymupdf.*", "fitz.*"]
+module = ["pymupdf", "pymupdf.*", "fitz", "fitz.*"]
 disallow_untyped_calls = false
